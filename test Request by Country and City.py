@@ -16,14 +16,17 @@ def locu_search(country,city) :
     urlreq="https://api.locu.com/v1_0/venue/search/?country="+str(country)+"&locality="+str(city)+"&api_key="+str(locu_api)
     json_obj=urllib.request.urlopen(str(urlreq))
     data=json.loads(json_obj.readall().decode('utf-8')) #.load(json_obj)
+    i=1
     for item in data['objects'] :
-        print("name :"+item['name'])
+        print(str(i)+".name : "+item['name'])
         if item['lat']!= None :
-            print ("latitude : "+str(item['lat']))
+            print ("     latitude : "+str(item['lat']))
         if item['long']!= None :
-            print ("longitude : "+str(item['long']))
+            print ("     longitude : "+str(item['long']))
+        if item['street_address']!=None :
+            print ("     address : "+str(item['street_address']))
         print(' ')
-
+        i+=1
 country=input()
 city=input()
 locu_search(country,city)
